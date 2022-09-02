@@ -1,0 +1,21 @@
+.project-container {
+    width: auto;
+    height: 860px;
+}
+
+.button-container {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 70px;
+}
+
+.button-to-chase {
+    font-size: 16px;
+    background-color: rgb(242, 3, 3);
+    text-align:center;
+    position: relative;
+    top: 30%;
+    left: 11%;
+}
