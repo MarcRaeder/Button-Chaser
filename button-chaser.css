@@ -9,13 +9,17 @@
     top: 50%;
     width: 120px;
     height: 70px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .button-to-chase {
     font-size: 16px;
     background-color: rgb(242, 3, 3);
-    text-align:center;
+    text-align: center;
     position: relative;
-    top: 30%;
-    left: 11%;
+    top: 40%;
+    left: 12%;
+
+
 }
