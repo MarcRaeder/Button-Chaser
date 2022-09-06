@@ -1,64 +1,97 @@
 const Movement = 40;
-button = document.getElementsByClassName("button-container")[0];
+const buttonContainer = document.getElementsByClassName("button-container")[0];
+const button = document.getElementsByClassName("button-to-chase")[0];
 const mousePosition = {
     leftTop: 1,
-    rightTop: 2,
-    leftBottom: 3,
-    rightBottom: 4,
+    top: 2,
+    rightTop: 3,
+    left: 4,
+    right: 5,
+    leftBottom: 6,
+    bottom: 7,
+    rightBottom: 8
 };
 
-function moveButton() {
+function getMousePosition(event) {
 
-    const buttonContainerPosLeft = button.offsetLeft;
-    const buttonContainerPosTop = button.offsetTop;
+    const buttonTopSide = buttonContainer.offsetTop + button.offsetTop;
+    const buttonLeftSide = buttonContainer.offsetLeft + button.offsetLeft;
+    const buttonRightSide = buttonLeftSide + button.offsetWidth;
+    const buttonBottomSide = buttonTopSide + button.offsetHeight;
+
     const mousePositionX = event.x;
     const mousePositionY = event.y;
 
-    function getMousePosition() {
+    const mouseIsOnTop = mousePositionY <= buttonTopSide && mousePositionX >= buttonLeftSide && mousePositionX <= buttonRightSide;
+    const mouseIsOnBottom = mousePositionY >= buttonBottomSide && mousePositionX >= buttonLeftSide && mousePositionX <= buttonRightSide;
+    const mouseIsOnLeft = mousePositionX <= buttonLeftSide && mousePositionY >= buttonTopSide && mousePositionY <= buttonBottomSide;
+    const mouseIsOnRight = mousePositionX >= buttonRightSide && mousePositionY >= buttonTopSide && mousePositionY <= buttonBottomSide;
 
-        const mouseIsOnTop = mousePositionY <= buttonContainerPosTop;
-        const mouseIsOnBottom = mousePositionY >= buttonContainerPosTop;
-        const mouseIsOnLeft = mousePositionX <= buttonContainerPosLeft;
-        const mouseIsOnRight = mousePositionX >= buttonContainerPosLeft;
+    const mouseIsOnLeftTop = mousePositionY <= buttonTopSide && mousePositionX <= buttonLeftSide;
+    const mouseIsOnRightTop = mousePositionY <= buttonTopSide && mousePositionX >= buttonRightSide;
+    const mouseIsOnLeftBottom = mousePositionY >= buttonBottomSide && mousePositionX <= buttonLeftSide;
+    const mouseIsOnRightBottom = mousePositionY >= buttonBottomSide && mousePositionX >= buttonRightSide;
 
-        const mouseIsOnLeftTop = mouseIsOnLeft && mouseIsOnTop;
-        const mouseIsOnRightTop = mouseIsOnRight && mouseIsOnTop;
-        const mouseIsOnLeftBottom = mouseIsOnLeft && mouseIsOnBottom;
-        const mouseIsOnRightBottom = mouseIsOnRight && mouseIsOnBottom;
-
-        if (mouseIsOnLeftTop) {
-            return mousePosition.leftTop;
-        }
-        if (mouseIsOnRightTop) {
-            return mousePosition.rightTop;
-        }
-        if (mouseIsOnLeftBottom) {
-            return mousePosition.leftBottom;
-        }
-        if (mouseIsOnRightBottom) {
-            return mousePosition.rightBottom;
-        }
+    if (mouseIsOnLeftTop) {
+        return mousePosition.leftTop;
     }
+    if (mouseIsOnRightTop) {
+        return mousePosition.rightTop;
+    }
+    if (mouseIsOnLeftBottom) {
+        return mousePosition.leftBottom;
+    }
+    if (mouseIsOnRightBottom) {
+        return mousePosition.rightBottom;
+    }
+    if (mouseIsOnTop) {
+        return mousePosition.top;
+    }
+    if (mouseIsOnBottom) {
+        return mousePosition.bottom;
+    }
+    if (mouseIsOnLeft) {
+        return mousePosition.left;
+    }
+    if (mouseIsOnRight) {
+        return mousePosition.right;
+    }
+}
 
-    const mouseFinalPosition = getMousePosition();
+function moveButton(event) {
+
+    const mouseFinalPosition = getMousePosition(event);
+    console.log(mouseFinalPosition);
     switch (mouseFinalPosition) {
+        case mousePosition.top:
+            buttonContainer.style.top = `${buttonContainer.offsetTop + Movement}px`;
+            break;
+        case mousePosition.bottom:
+            buttonContainer.style.top = `${buttonContainer.offsetTop - Movement}px`;
+            break;
+        case mousePosition.left:
+            buttonContainer.style.left = `${buttonContainer.offsetLeft + Movement}px`;
+            break;
+        case mousePosition.right:
+            buttonContainer.style.left = `${buttonContainer.offsetLeft - Movement}px`;
+            break;
         case mousePosition.leftTop:
-            button.style.left = `${button.offsetLeft + Movement}px`;
-            button.style.top = `${button.offsetTop + Movement}px`;
+            buttonContainer.style.left = `${buttonContainer.offsetLeft + Movement}px`;
+            buttonContainer.style.top = `${buttonContainer.offsetTop + Movement}px`;
             break;
         case mousePosition.leftBottom:
-            button.style.left = `${button.offsetLeft + Movement}px`;
-            button.style.top = `${button.offsetTop - Movement}px`;
+            buttonContainer.style.left = `${buttonContainer.offsetLeft + Movement}px`;
+            buttonContainer.style.top = `${buttonContainer.offsetTop - Movement}px`;
             break;
         case mousePosition.rightTop:
-            button.style.left = `${button.offsetLeft - Movement}px`;
-            button.style.top = `${button.offsetTop + Movement}px`;
+            buttonContainer.style.left = `${buttonContainer.offsetLeft - Movement}px`;
+            buttonContainer.style.top = `${buttonContainer.offsetTop + Movement}px`;
             break;
         case mousePosition.rightBottom:
-            button.style.left = `${button.offsetLeft - Movement}px`;
-            button.style.top = `${button.offsetTop - Movement}px`;
+            buttonContainer.style.left = `${buttonContainer.offsetLeft - Movement}px`;
+            buttonContainer.style.top = `${buttonContainer.offsetTop - Movement}px`;
             break;
     }
 }
 
-button.onmouseover = () => moveButton("button-container");
+buttonContainer.onmouseover = (event) => moveButton(event);
