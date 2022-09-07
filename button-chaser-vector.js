@@ -3,7 +3,6 @@ const projectcontainer = document.getElementsByClassName("project-container")[0]
 const distanceBorder = 100;
 const xBorder = 10;
 const yBorder = 20;
-const buttonRightSide = button.offsetLeft + button.offsetWidth;
 
 onmousemove = function (e) {
 
@@ -12,6 +11,7 @@ onmousemove = function (e) {
   var dX = e.clientX - buttonX;
   var dY = e.clientY - buttonY;
   var distance = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+  var buttonRightSide = button.offsetLeft + button.offsetWidth;
 
   if (distance <= distanceBorder) {
     button.style.left = `${button.offsetLeft - dX}px`;
