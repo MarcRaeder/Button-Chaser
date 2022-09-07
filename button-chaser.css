@@ -1,0 +1,40 @@
+.project-container {
+  width: auto;
+  height: 900px;
+}
+
+.button-to-chase {
+  font-size: 16px;
+  background-color: rgba(244, 5, 5, 0.946);
+  text-align: center;
+  position: sticky;
+  top: 50%;
+  left: 50%;
+  animation-name: backgroundColorPalette;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+@keyframes backgroundColorPalette {
+  0% {
+    background: #ee6055;
+  }
+
+  25% {
+    background: #60d394;
+  }
+
+  50% {
+    background: #aaf683;
+  }
+
+  75% {
+    background: #ffd97d;
+  }
+
+  100% {
+    background: #ff9b85;
+  }
+}
