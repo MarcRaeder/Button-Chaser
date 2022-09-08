@@ -94,4 +94,10 @@ function moveButton(event) {
   }
 }
 
+function fromCornerToMid() {
+  buttonContainer.style.left = `${document.body.offsetWidth / 2}px`;
+  buttonContainer.style.top = `${document.body.offsetHeight / 2}px`;
+}
+
 buttonContainer.onmouseover = (event) => moveButton(event);
+button.onmouseover = () => fromCornerToMid("button-container");
